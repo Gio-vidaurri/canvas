@@ -18,9 +18,9 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.
 var PI2 = Math.PI * 2;
 var container, canvas, context;
 //
-var totalDots = isMobile ? 50 : 150;
+var totalDots = isMobile ? 80 : 250;
 var dots = [];
-var min_distance = 80;
+var min_distance = 200;
 var friction = 0.05; //
 // size
 var width = window.innerWidth,
@@ -86,6 +86,9 @@ function onWindowResize() {
 
 var Dot = function(args) {
     if (args === undefined) var args = {};
+    // this.alpha = Math.random();
+    // this.rgba = "rgba(255, 255, 255, " + this.alpha + ")";
+    this.radius = args.radius || this.alpha * 3;
     this.position = {
         x: args.x || Math.random() * canvas.width,
         y: args.y || Math.random() * canvas.height
@@ -99,6 +102,7 @@ var Dot = function(args) {
         this.updateCoords();
         context.beginPath();
         context.arc(this.position.x, this.position.y, this.radius, 0, PI2);
+        // context.fillStyle = this.rgba;
         context.fill();
     }
     this.updateCoords = function() {
@@ -117,7 +121,7 @@ function updateCursor() {
     cursor.y += (mouse.y - cursor.y) * friction;
     context.beginPath();
     context.fillStyle = "black";
-    context.arc(cursor.x, cursor.y, 2, 0, PI2);
+    context.arc(cursor.x, cursor.y, 5, 0, PI2);
     context.fill();
 }
 
