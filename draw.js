@@ -9,7 +9,7 @@ function init () {
 
 	SetSize();
 
-	widow.addEventListener("resize", SetSize);
+	window.addEventListener("resize", SetSize);
 }
 
 function SetSize() {
@@ -17,7 +17,7 @@ function SetSize() {
 	maxHeight = window.innerHeight;
 
 	canvas.width = maxWidth;
-	canvas.width = maxHeight;
+	canvas.height = maxHeight;
 }
 
 function animate() {
@@ -26,8 +26,24 @@ function animate() {
 	render();
 }
 
-function render(){
+function render() {
+	context.clearRect(0, 0, maxWidth, maxHeight);
+
+	context.fillStyle = "red";
 	
+	context.fillRect(0, 0, 100, 100);
+
+	context.beginPath();
+	context.moveTo(maxWidth/2, maxHeight/2);
+	context.lineTo(10, 200);
+	context.lineTo(10, 400);
+	context.lineTo(200, 100);
+
+	context.lineTo(maxWidth/2, maxHeight/2);
+	context.strokeStyle = "blue";
+	context.stroke();
+	context.closePath();
+
 }
 
 init();
